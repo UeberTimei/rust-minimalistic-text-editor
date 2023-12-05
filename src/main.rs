@@ -1,6 +1,15 @@
 use std::{io::{self, Read, Write}, fs::{OpenOptions, File}};
 
-fn main() -> Result<(), io::Error> {
+// Main function that calls the text_editing function to modify the content of a file.
+fn main(){
+    loop {
+        text_editing().unwrap();
+    }
+}
+
+// Text editing function that reads the content of a file, modifies the specified line,
+// and writes the modified content to a new file.
+fn text_editing() -> Result<(), io::Error> {
     // Open the file in read mode
     let mut file = OpenOptions::new().read(true).open("hello.txt").expect("There is no such file");
 
@@ -33,6 +42,6 @@ fn main() -> Result<(), io::Error> {
     let mut changed_file = File::create("hello.txt").unwrap();
     changed_file.write(new_data.join("\n").as_bytes()).expect("An error occurred while writing new data");
     drop(changed_file); // Close the file
-
+    println!("");
     Ok(())
 }
